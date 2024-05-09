@@ -1,6 +1,7 @@
 import { expect, test, describe } from 'vitest'
 import { filterArray } from './filterArray'
 import { compareArray } from './compareArray';
+import { uniqueBy } from './uniqueBy';
 
 test('filterArray', () => {
   const targetArray = [
@@ -50,3 +51,17 @@ describe('compareArray', () => {
   });
 })
 
+test('uniqueBy', () => {
+  const arr = [
+    { id: 1, name: 'John' },
+    { id: 2, name: 'Jane' },
+    { id: 1, name: 'John' },
+    { id: 3, name: 'Tom' },
+    { id: 2, name: 'Jane' },
+  ];
+  expect(uniqueBy(arr, 'id')).toEqual([
+    { id: 1, name: 'John' },
+    { id: 2, name: 'Jane' },
+    { id: 3, name: 'Tom' },
+  ]);
+});
