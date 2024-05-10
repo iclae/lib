@@ -7,6 +7,7 @@
 export function uniqueBy(arr, key) {
   const map = new Map();
   return Array.from(arr.reduce((acc, curr) => {
+    if (!curr) return acc;
     if (!map.has(curr[key])) {
       map.set(curr[key], curr);
       acc.add(curr);

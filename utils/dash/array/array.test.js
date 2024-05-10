@@ -51,17 +51,34 @@ describe('compareArray', () => {
   });
 })
 
-test('uniqueBy', () => {
-  const arr = [
-    { id: 1, name: 'John' },
-    { id: 2, name: 'Jane' },
-    { id: 1, name: 'John' },
-    { id: 3, name: 'Tom' },
-    { id: 2, name: 'Jane' },
-  ];
-  expect(uniqueBy(arr, 'id')).toEqual([
-    { id: 1, name: 'John' },
-    { id: 2, name: 'Jane' },
-    { id: 3, name: 'Tom' },
-  ]);
+describe('uniqueBy', () => {
+  test('uniqueBy - has null item', () => {
+    const arr = [
+      { id: 1, name: 'John' },
+      { id: 2, name: 'Jane' },
+      null,
+      { id: 3, name: 'Tom' },
+      { id: 2, name: 'Jane' },
+    ];
+    expect(uniqueBy(arr, 'id')).toEqual([
+      { id: 1, name: 'John' },
+      { id: 2, name: 'Jane' },
+      { id: 3, name: 'Tom' },
+    ]);
+  });
+
+  test('uniqueBy', () => {
+    const arr = [
+      { id: 1, name: 'John' },
+      { id: 2, name: 'Jane' },
+      { id: 1, name: 'John' },
+      { id: 3, name: 'Tom' },
+      { id: 2, name: 'Jane' },
+    ];
+    expect(uniqueBy(arr, 'id')).toEqual([
+      { id: 1, name: 'John' },
+      { id: 2, name: 'Jane' },
+      { id: 3, name: 'Tom' },
+    ]);
+  });
 });
