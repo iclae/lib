@@ -1,5 +1,6 @@
 import { test, expect, describe, vi } from 'vitest';
 import { debounce } from './debounce';
+import { throttle } from './throttle';
 
 describe('debounce', () => {
   // Test case 1: Debounced function should be called after the specified delay
@@ -36,4 +37,32 @@ describe('debounce', () => {
   });
 })
 
+test('throttle', () => {
+  let count = 0;
+  const increment = () => {
+    count++;
+  };
+
+  const throttledIncrement = throttle(increment, 100);
+
+  // Call the throttled function multiple times within the delay
+  throttledIncrement();
+  throttledIncrement();
+  throttledIncrement();
+
+  // Wait for the delay to pass
+  setTimeout(() => {
+    throttledIncrement();
+  }, 200);
+
+  // Wait for the delay to pass again
+  setTimeout(() => {
+    throttledIncrement();
+  }, 300);
+
+  // Check the count after a sufficient delay
+  setTimeout(() => {
+    expect(count).toBe(2);
+  }, 400);
+});
 
